@@ -1,5 +1,6 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
+
 const Home = () => {
   return (
     <View style={styles.body}>
@@ -29,7 +30,9 @@ const Home = () => {
           <TouchableOpacity onPress={() => console.log("Hello World clicked!")}>
               <Text style={styles.link}>→</Text>
           </TouchableOpacity>
-      </div>  
+      </div> 
+
+      <a href="app">APP</a> 
     </View>
   );
 }
