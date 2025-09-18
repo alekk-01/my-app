@@ -1,11 +1,11 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, Linking, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 
 const Home = () => {
   return (
     <View style={styles.body}>
 
-      <div style={styles.column}>
+      <View style={styles.column}>
         <TouchableOpacity onPress={() => console.log("Hello World clicked!")}>
             <Text style={styles.link}>←</Text>
         </TouchableOpacity>
@@ -17,23 +17,26 @@ const Home = () => {
         <TouchableOpacity onPress={() => console.log("Hello World clicked!")}>
             <Text style={styles.link}>←</Text>
         </TouchableOpacity>
-      </div>
+      </View>
 
-      <div style={styles.container}>
+      <View style={styles.container}>
           <Image
             source={require("./attractive-young-man-standing-all-isolated-on-white-background-BX7MEE.jpg")}
             style={{ width: 200, height: 600 }}
           />
-      </div>
+      </View>
 
-      <div style={styles.column}>
+      <View style={styles.column}>
           <TouchableOpacity onPress={() => console.log("Hello World clicked!")}>
               <Text style={styles.link}>→</Text>
           </TouchableOpacity>
-      </div> 
+      </View> 
 
-      <a href="app">APP</a> 
-    </View>
+
+
+          <TouchableOpacity onPress={() => Linking.openURL("app")}>
+              <Text style={styles.link}>App</Text>
+          </TouchableOpacity>    </View>
   );
 }
 
