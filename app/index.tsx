@@ -1,4 +1,4 @@
-import { Image, Linking, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 
 const Home = () => {
@@ -31,12 +31,13 @@ const Home = () => {
               <Text style={styles.link}>→</Text>
           </TouchableOpacity>
       </View> 
+      <View>
+          <TouchableOpacity onPress={() => console.log("Hello World clicked!")}>
+              <Text style={styles.link}>→</Text>
+          </TouchableOpacity>   
+      </View> 
 
-
-
-          <TouchableOpacity onPress={() => Linking.openURL("app")}>
-              <Text style={styles.link}>App</Text>
-          </TouchableOpacity>    </View>
+     </View>
   );
 }
 
