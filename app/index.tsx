@@ -1,44 +1,55 @@
 import { useRouter } from "expo-router";
+import React, { useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+  
+
+
 
 const Home = () => {
+  const Myndir = [
+  require("./OIP__1_-removebg-preview.png"),
+  require("./OIP (1).webp"),
+  require("./attractive-young-man-standing-all-isolated-on-white-background-BX7MEE.jpg")
+]
+  const [index, setIndex] = useState(0);
   
+
   const router = useRouter()
   return (
 
     <View style={styles.body}>
 
       <View style={styles.column}>
-        <TouchableOpacity onPress={() => console.log("Hello World clicked!")}>
+        <TouchableOpacity onPress={() => setIndex((index - 1) % Myndir.length)}>
             <Text style={styles.link}>←</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => console.log("Hello World clicked!")}>
+        <TouchableOpacity onPress={() => setIndex((index - 1) % Myndir.length)}>
             <Text style={styles.link}>←</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => console.log("Hello World clicked!")}>
+        <TouchableOpacity onPress={() => setIndex((index - 1) % Myndir.length)}>
             <Text style={styles.link}>←</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.container}>
           <Image
-            source={require("./attractive-young-man-standing-all-isolated-on-white-background-BX7MEE.jpg")}
+            source={Myndir[index]}
             style={{ width: 200, height: 600 }}
           />
           <Image
-            source={require("./OIP (1).webp")}
+            source={Myndir[index]}
             style={styles.overlayImage}
           />
       </View>
 
       <View style={styles.column}>
-          <TouchableOpacity onPress={() => console.log("Hello World clicked!")}>
+          <TouchableOpacity onPress={() => setIndex((index + 1) % Myndir.length)}>
               <Text style={styles.link}>→</Text>
           </TouchableOpacity>
           
-          <TouchableOpacity onPress={() => console.log("Hello World clicked!")}>
+          <TouchableOpacity onPress={() => setIndex((index + 1) % Myndir.length)}>
               <Text style={styles.link}>→</Text>
           </TouchableOpacity>
          
@@ -81,8 +92,8 @@ const styles = StyleSheet.create({
   },
   overlayImage: {
     position: "absolute",
-    top: 250,
-    right: -20,
-
+    top: 183,
+    right: -15,
+    height: 322,
   }
 })
