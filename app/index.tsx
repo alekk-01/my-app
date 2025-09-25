@@ -8,8 +8,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 const Home = () => {
   const Myndir = [
   require("./OIP__1_-removebg-preview.png"),
-  require("./OIP (1).webp"),
-  require("./attractive-young-man-standing-all-isolated-on-white-background-BX7MEE.jpg")
+  require("./OIP (7).webp")
 ]
   const [index, setIndex] = useState(0);
   
@@ -35,7 +34,7 @@ const Home = () => {
 
       <View style={styles.container}>
           <Image
-            source={Myndir[index]}
+            source={require("./attractive-young-man-standing-all-isolated-on-white-background-BX7MEE.jpg")}
             style={{ width: 200, height: 600 }}
           />
           <Image
