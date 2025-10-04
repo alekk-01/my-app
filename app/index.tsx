@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-  
+import Gallery from "./app";
 
 
 
@@ -11,7 +11,6 @@ const Home = () => {
   require("./OIP (7).webp")
 ]
   const [index, setIndex] = useState(0);
-  
 
   const router = useRouter()
   return (
@@ -55,6 +54,8 @@ const Home = () => {
           <TouchableOpacity onPress={() => router.push("/app")}>
               <Text style={styles.link}>→</Text>
           </TouchableOpacity>   
+          <Gallery />
+
       </View> 
 
 
