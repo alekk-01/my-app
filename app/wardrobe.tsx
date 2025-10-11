@@ -1,19 +1,10 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import Images from "./app";
 
 const Home = () => {
   return (
     <View style={styles.body}>
-        <div style={styles.header}>
-
-            <TouchableOpacity onPress={() => console.log("Hello World clicked!")}>
-                <Text style={styles.link}>Button</Text>
-            </TouchableOpacity>
-        </div>
-
-      <a href="/">Hello World</a>
-      <div>
-        <Text></Text>
-      </div>
+        <Images />
     </View>
   );
 }

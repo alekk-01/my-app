@@ -3,7 +3,7 @@ import * as ImagePicker from "expo-image-picker"; //velja myndir
 import * as React from "react"; //react in general
 import { Button, FlatList, Image, StyleSheet, View } from "react-native"; //allt extra sem ég bæti við
 
-export default function Gallery() {
+export default function Images() {
   const [Images, setImage] = React.useState<string[]>([]);
 
   //image saver dót
@@ -51,18 +51,20 @@ export default function Gallery() {
     await AsyncStorage.removeItem("Gallery");
     setImage([])
   }
+  
   //ef ekki þá birta val glugga
   return (
     <View style={styles.container}>
       <Button title="Pick an image from gallery" onPress={pickImage} />
-      <FlatList
-        data={Images}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <Image source={{ uri: item }} style={styles.image} />
-        )}
-        numColumns={2} 
-      />
+    
+    <FlatList
+      data={Images} 
+      keyExtractor={(item, index) => index.toString()}
+      renderItem={({ item }) => (
+        <Image source={{ uri: item }} style={styles.image} /> 
+      )}
+      numColumns={2}  
+    />
     <Button title="Clear Gallery" onPress={clearGallery} />
 
     </View>

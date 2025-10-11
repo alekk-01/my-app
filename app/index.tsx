@@ -1,7 +1,7 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
-import React, { useState } from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import Gallery from "./app";
+import React, { useEffect, useState } from "react";
+import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 
 
@@ -10,23 +10,49 @@ const Home = () => {
   require("./OIP__1_-removebg-preview.png"),
   require("./OIP (7).webp")
 ]
+  const [images, setImages] = useState<string[]>([]);
   const [index, setIndex] = useState(0);
-
   const router = useRouter()
+
+  useEffect(() => {
+    const loadImages = async () => {
+      try {
+        const stored = await AsyncStorage.getItem("Gallery");
+        if (stored) {
+           setImages(JSON.parse(stored));
+        }
+      } catch(e) {
+        Alert.alert("alert weeewoooweeewooo")
+      }
+    };
+    loadImages();
+  },[]);
+
+  const nextmynd = () => {
+    if (images.length > 0) {
+      setIndex((prev) => (prev + 1) % images.length)
+    }
+  };
+
+  const fyrrimynd = () => {
+    if(images.length > 0) {
+      setIndex((prev) => (prev - 1 + images.length) % images.length)
+    }
+  }
   return (
 
     <View style={styles.body}>
 
       <View style={styles.column}>
-        <TouchableOpacity onPress={() => setIndex((index - 1) % Myndir.length)}>
+        <TouchableOpacity onPress={fyrrimynd}>
             <Text style={styles.link}>←</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => setIndex((index - 1) % Myndir.length)}>
+        <TouchableOpacity onPress={fyrrimynd}>
             <Text style={styles.link}>←</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => setIndex((index - 1) % Myndir.length)}>
+        <TouchableOpacity onPress={fyrrimynd}>
             <Text style={styles.link}>←</Text>
         </TouchableOpacity>
       </View>
@@ -36,25 +62,30 @@ const Home = () => {
             source={require("./attractive-young-man-standing-all-isolated-on-white-background-BX7MEE.jpg")}
             style={{ width: 200, height: 600 }}
           />
+          {images.length > 0 && (
           <Image
-            source={Myndir[index]}
+            source={{uri: images[index]}}
             style={styles.overlayImage}
           />
+          )}
+    
       </View>
 
       <View style={styles.column}>
-          <TouchableOpacity onPress={() => setIndex((index + 1) % Myndir.length)}>
+          <TouchableOpacity onPress={nextmynd}>
               <Text style={styles.link}>→</Text>
           </TouchableOpacity>
           
-          <TouchableOpacity onPress={() => setIndex((index + 1) % Myndir.length)}>
+          <TouchableOpacity onPress={() => router.push("/wardrobe")}>
               <Text style={styles.link}>→</Text>
           </TouchableOpacity>
          
           <TouchableOpacity onPress={() => router.push("/app")}>
               <Text style={styles.link}>→</Text>
-          </TouchableOpacity>   
-          <Gallery />
+          </TouchableOpacity>  
+
+
+
 
       </View> 
 
@@ -75,6 +106,7 @@ const styles = StyleSheet.create({
 
   },
   container: {
+
         backgroundColor: "red"
 
   },
@@ -92,8 +124,9 @@ const styles = StyleSheet.create({
   },
   overlayImage: {
     position: "absolute",
-    top: 183,
-    right: -15,
-    height: 322,
+    top: 230,
+    right: 62,
+    height: 290,
+    width: 100,
   }
 })
