@@ -5,6 +5,10 @@ import { Button, FlatList, Image, StyleSheet, View } from "react-native"; //allt
 
 export default function Images() {
   const [Images, setImage] = React.useState<string[]>([]);
+  const [hats, setHats] = React.useState<string[]>([]);
+  const [shirts, setShirts] = React.useState<string[]>([]);
+  const [pants, setPants] = React.useState<string[]>([]);
+  const [shoes, setShoes] = React.useState<string[]>([]);
 
   //image saver dót
   React.useEffect(() => {
@@ -24,7 +28,7 @@ export default function Images() {
   }, []);
 
   //velja image dót
-  const pickImage = async () => {
+  const pickImage = async (category: string) => {}
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
     //fá leyfi 
@@ -41,7 +45,11 @@ export default function Images() {
 
     //skila tilbaka image og vista því
     if (!result.canceled) {
-      const uri = result.assets[0].uri
+      const uri = result.assets[0].uri;
+      switch {
+        case "hat":
+
+      }
       const nyttgallery = [...Images,uri ]
       setImage(nyttgallery);
       await AsyncStorage.setItem("Gallery", JSON.stringify(nyttgallery));
