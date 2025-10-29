@@ -4,39 +4,90 @@ import React, { useEffect, useState } from "react";
 import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 
+//GERA TAGS FYRIR BUXUR OG SKÓ, Búa til index fyrir Shirts svo það sé possible að flippa í gegnum það
 
 const Home = () => {
-  const Myndir = [
-  require("./OIP__1_-removebg-preview.png"),
-  require("./OIP (7).webp")
-]
-  const [images, setImages] = useState<string[]>([]);
-  const [index, setIndex] = useState(0);
+
+  const [shirts, setShirts] = useState<string[]>([]);
+  const [hats, setHats] = useState<string[]>([]);
+  const [pants, setPants] = useState<string[]>([]);
+  const [shoes, setShoes] = useState<string[]>([]);
+
+
+  const [shirtindex, setShirtIndex] = useState(0);
+  const [hatindex, setHatIndex] = useState(0);
+  const [pantsindex, setPantsIndex] = useState(0);
+  const [shoeindex, setShoesIndex] = useState(0);
   const router = useRouter()
 
   useEffect(() => {
-    const loadImages = async () => {
+    const loadAll = async () => {
       try {
-        const stored = await AsyncStorage.getItem("Gallery");
-        if (stored) {
-           setImages(JSON.parse(stored));
+        const storedHats = await AsyncStorage.getItem("Gallery_Hats");
+        if (storedHats) {
+           setHats(JSON.parse(storedHats));
+        }
+        const storedShirts = await AsyncStorage.getItem("Gallery_Shirts")
+        if (storedShirts) {
+          setShirts(JSON.parse(storedShirts));
+        }
+        const storedPants = await AsyncStorage.getItem("Gallery_Pants")
+        if (storedPants) {
+          setPants(JSON.parse(storedPants));
+        }
+        const storedShoes = await AsyncStorage.getItem("Gallery_Shoes")
+        if (storedShoes) {
+          setShoes(JSON.parse(storedShoes));
         }
       } catch(e) {
         Alert.alert("alert weeewoooweeewooo")
       }
     };
-    loadImages();
+    loadAll();
   },[]);
 
-  const nextmynd = () => {
-    if (images.length > 0) {
-      setIndex((prev) => (prev + 1) % images.length)
+  const nextHat = () => {
+    if (hats.length > 0) {
+      setHatIndex((prev) => (prev + 1) % hats.length)
     }
   };
 
-  const fyrrimynd = () => {
-    if(images.length > 0) {
-      setIndex((prev) => (prev - 1 + images.length) % images.length)
+  const prevhat = () => {
+    if(hats.length > 0) {
+      setHatIndex((prev) => (prev - 1 + hats.length) % hats.length)
+    }
+  }
+    const nextShirt = () => {
+    if (shirts.length > 0) {
+      setShirtIndex((prev) => (prev + 1) % shirts.length)
+    }
+  };
+
+  const prevShirt = () => {
+    if(shirts.length > 0) {
+      setShirtIndex((prev) => (prev - 1 + shirts.length) % shirts.length)
+    }
+  }
+  const nextPants = () => {
+    if (pants.length > 0) {
+      setPantsIndex((prev) => (prev + 1) % pants.length)
+    }
+  }
+
+  const prevPants = () => {
+    if(pants.length > 0) {
+      setPantsIndex((prev) => (prev - 1 + pants.length) % pants.length)
+    }
+  }
+  const nextShoes = () => {
+    if (shoes.length > 0) {
+      setShoesIndex((prev) => (prev + 1) % shoes.length)
+    }
+  }
+
+  const prevShoes = () => {
+    if(pants.length > 0) {
+      setShoesIndex((prev) => (prev - 1 + shoes.length) % shoes.length)
     }
   }
   return (
@@ -44,16 +95,20 @@ const Home = () => {
     <View style={styles.body}>
 
       <View style={styles.column}>
-        <TouchableOpacity onPress={fyrrimynd}>
+        <TouchableOpacity onPress={prevhat}>
             <Text style={styles.link}>←</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={fyrrimynd}>
+        <TouchableOpacity onPress={prevShirt}>
             <Text style={styles.link}>←</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={fyrrimynd}>
+        <TouchableOpacity onPress={prevPants}>
             <Text style={styles.link}>←</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={prevShoes}>
+              <Text style={styles.link}>←</Text>
         </TouchableOpacity>
       </View>
 
@@ -62,26 +117,52 @@ const Home = () => {
             source={require("./attractive-young-man-standing-all-isolated-on-white-background-BX7MEE.jpg")}
             style={{ width: 200, height: 600 }}
           />
-          {images.length > 0 && (
+          {hats.length > 0 && (
           <Image
-            source={{uri: images[index]}}
-            style={styles.overlayImage}
+            source={{uri: hats[hatindex]}}
+            style={styles.overlayImageTop}
           />
           )}
-    
+          {shirts.length > 0 && (
+          <Image
+            source={{uri: shirts[shirtindex]}}
+            style={styles.overlayImageMid}
+          />
+          )}
+          {pants.length > 0 && (
+          <Image
+            source={{uri: pants[pantsindex]}}
+            style={styles.overlayImageBot}
+          />
+          )}
+          {shoes.length > 0 && (
+          <Image
+            source={{uri: shoes[shoeindex]}}
+            style={styles.overlayImageSupp}
+          />
+          )}
+
       </View>
 
       <View style={styles.column}>
-          <TouchableOpacity onPress={nextmynd}>
+          <TouchableOpacity onPress={nextHat}>
               <Text style={styles.link}>→</Text>
           </TouchableOpacity>
           
-          <TouchableOpacity onPress={() => router.push("/wardrobe")}>
+          <TouchableOpacity onPress={nextShirt}>
               <Text style={styles.link}>→</Text>
           </TouchableOpacity>
-         
-          <TouchableOpacity onPress={() => router.push("/app")}>
+  
+          <TouchableOpacity onPress={nextPants}>
               <Text style={styles.link}>→</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={nextShoes}>
+              <Text style={styles.link}>→</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => router.push("/app")}>
+              <Text style={styles.link}>APP</Text>
           </TouchableOpacity>  
 
 
@@ -122,11 +203,32 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-around"
   },
-  overlayImage: {
+  overlayImageTop: {
     position: "absolute",
-    top: 230,
+    top: 20,
     right: 62,
-    height: 290,
+    height: 50,
     width: 100,
+  },
+  overlayImageMid: {
+    position: "absolute",
+    top: 120,
+    right: 50,
+    height: 150,
+    width: 120,
+  },
+    overlayImageBot: {
+    position: "absolute",
+    top: 250,
+    right: 62,
+    height: 250,
+    width: 100,
+  },
+    overlayImageSupp: {
+    position: "absolute",
+    top: 500,
+    right: 45,
+    height: 50,
+    width: 130,
   }
 })
