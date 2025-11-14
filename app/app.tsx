@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"; //image save dót
 import * as ImagePicker from "expo-image-picker"; //velja myndir
 import * as React from "react"; //react in general
-import { Button, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"; //allt extra sem ég bæti við
+import { Button, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native"; //allt extra sem ég bæti við
 
 export default function Images() {
   const [hats, setHats] = React.useState<string[]>([]);
@@ -94,76 +94,112 @@ export default function Images() {
   
   //ef ekki þá birta val glugga
   return (
+  <View>
     <View>
-      <TouchableOpacity onPress={() => pickImage("hat")} >
-        <Text>press me (hats)</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => pickImage("shirt")} >
-        <Text>press me (shirt)</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => pickImage("pants")} >
-        <Text>press me (pants)</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => pickImage("shoe")} >
-        <Text>press me (shoes)</Text>
-      </TouchableOpacity>
-      
-    <FlatList
-      data={shirts} 
-      keyExtractor={(item, index) => index.toString()}
-      renderItem={({ item }) => (
-        <Image source={{ uri: item }} style={styles.image} /> 
-      )}
-      numColumns={2}  
-    />
-<Text>----------------------------------------------------</Text>
-    <FlatList
-      data={hats} 
-      keyExtractor={(item, index) => index.toString()}
-      renderItem={({ item }) => (
-        <Image source={{ uri: item }} style={styles.image} /> 
-      )}
-      numColumns={2}  
-    />
-<Text>----------------------------------------------------</Text>
-
-    <FlatList
-      data={pants} 
-      keyExtractor={(item, index) => index.toString()}
-      renderItem={({ item }) => (
-        <Image source={{ uri: item }} style={styles.image} /> 
-      )}
-      numColumns={2}  
-    />
-<Text>----------------------------------------------------</Text>
-
-        <FlatList
-      data={shoes} 
-      keyExtractor={(item, index) => index.toString()}
-      renderItem={({ item }) => (
-        <Image source={{ uri: item }} style={styles.image} /> 
-      )}
-      numColumns={2}  
-    />
-
-
-    
-    <Button title="Clear Gallery" onPress={clearGallery} />
-
+      <Text style={styles.top}>Bæta við fötum</Text>
     </View>
-  );
+    <View style={styles.container}>
+        <TouchableOpacity onPress={() => pickImage("hat")} >
+          <Text style={styles.button}>Hats</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => pickImage("shirt")} >
+          <Text style={styles.button}>Shirt</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => pickImage("pants")} >
+          <Text style={styles.button}>Pants</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => pickImage("shoe")} >
+          <Text style={styles.button}>Shoes</Text>
+        </TouchableOpacity>
+      </View>
+    <ScrollView contentContainerStyle={styles.Page}>
+          <View style={styles.containerImages}>
+
+      <Text>--------------------------HATS--------------------------</Text>
+          <View style={styles.imageGrid}>
+            {hats.map((item, index) => (
+      <Image key={index} source={{ uri: item }} style={styles.image} />
+    ))}
+  </View>
+      <Text>--------------------------SHIRTS--------------------------</Text>
+          <View style={styles.imageGrid}>
+            {shirts.map((item, index) => (
+      <Image key={index} source={{ uri: item }} style={styles.image} />
+    ))}
+  </View>
+      <Text>-------------------------PANTS--------------------------</Text>
+
+          <View style={styles.imageGrid}>
+            {pants.map((item, index) => (
+      <Image key={index} source={{ uri: item }} style={styles.image} />
+    ))}
+  </View>
+      <Text>-------------------------SHOES---------------------------</Text>
+
+              <View style={styles.imageGrid}>
+            {shoes.map((item, index) => (
+      <Image key={index} source={{ uri: item }} style={styles.image} />
+    ))}
+  </View>
+
+
+          
+          <Button title="Clear Gallery" onPress={clearGallery} />
+      </View>
+    </ScrollView>
+  </View>
+
+  )
 }
 
 const styles = StyleSheet.create({
+  Page: {
+  },
+  top:{
+    backgroundColor: "white",
+    textAlign: "center",
+    fontSize: 15,
+    fontWeight: "bold"
+  },
   container: {
-    flex: 1,
+    backgroundColor: "white",
+    height: 75,
+    position: "absolute",
+    top: 15,
+    left: 0,
+    right: 0,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    padding: 10 ,
+    zIndex: 10,
     justifyContent: "center",
-    alignItems: "center",
+    
   },
   image: {
     width: 150,
     height: 150,
     margin: 20,
     borderRadius: 10,
+  },
+  button: {
+    margin: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingRight: 15,
+    paddingLeft: 15,
+    textAlign: "center",
+    backgroundColor: "blue",
+    color: "white"
+  },      
+     
+  imageGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+  },
+  containerImages: {
+    marginTop: 100
   },
 });

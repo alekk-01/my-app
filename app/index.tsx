@@ -110,7 +110,10 @@ const Home = () => {
         <TouchableOpacity onPress={prevShoes}>
               <Text style={styles.link}>←</Text>
         </TouchableOpacity>
+
+
       </View>
+      
 
       <View style={styles.container}>
           <Image
