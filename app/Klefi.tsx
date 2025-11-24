@@ -30,6 +30,9 @@ export default function Images() {
             if (storedShoes){
                 setShoes(JSON.parse(storedShoes));
             }
+
+ 
+
     
          } catch (e) {
         console.log("Error loading gallery:", e);
@@ -100,41 +103,41 @@ export default function Images() {
     </View>
     <View style={styles.container}>
         <TouchableOpacity onPress={() => pickImage("hat")} >
-          <Text style={styles.button}>Hats</Text>
+          <Text style={styles.button}>Húfur</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => pickImage("shirt")} >
-          <Text style={styles.button}>Shirt</Text>
+          <Text style={styles.button}>Bolur</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => pickImage("pants")} >
-          <Text style={styles.button}>Pants</Text>
+          <Text style={styles.button}>Buxur</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => pickImage("shoe")} >
-          <Text style={styles.button}>Shoes</Text>
+          <Text style={styles.button}>Skór</Text>
         </TouchableOpacity>
       </View>
     <ScrollView contentContainerStyle={styles.Page}>
           <View style={styles.containerImages}>
 
-      <Text>--------------------------HATS--------------------------</Text>
+      <Text>---------------------------HÚFA---------------------------</Text>
           <View style={styles.imageGrid}>
             {hats.map((item, index) => (
       <Image key={index} source={{ uri: item }} style={styles.image} />
     ))}
   </View>
-      <Text>--------------------------SHIRTS--------------------------</Text>
+      <Text>--------------------------BOLUR--------------------------</Text>
           <View style={styles.imageGrid}>
             {shirts.map((item, index) => (
       <Image key={index} source={{ uri: item }} style={styles.image} />
     ))}
   </View>
-      <Text>-------------------------PANTS--------------------------</Text>
+      <Text>--------------------------BUXUR--------------------------</Text>
 
           <View style={styles.imageGrid}>
             {pants.map((item, index) => (
       <Image key={index} source={{ uri: item }} style={styles.image} />
     ))}
   </View>
-      <Text>-------------------------SHOES---------------------------</Text>
+      <Text>---------------------------SKÓR---------------------------</Text>
 
               <View style={styles.imageGrid}>
             {shoes.map((item, index) => (
